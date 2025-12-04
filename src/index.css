@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body {
+    @apply selection:bg-neutral-900 selection:text-white;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-delay-450 {
+    animation-delay: 0.45s;
+  }
+
+  .animate-delay-500 {
+    animation-delay: 0.5s;
+  }
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(220px, 40vw, 520px);
+  height: clamp(220px, 40vw, 520px);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(140, 80, 255, 0.35), transparent 70%);
+  filter: blur(90px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
+}
+
+.animated-card {
+  position: relative;
+  will-change: transform, box-shadow;
+  transition: box-shadow 0.3s ease;
+}
+
+.icon-float {
+  display: inline-flex;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tiptap {
+  min-height: 320px;
+  color: #f5f5ff;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.tiptap p {
+  margin-bottom: 1rem;
+}
+
+.tiptap h2,
+.blog-content h2 {
+  font-size: 1.75rem;
+  margin: 2rem 0 1rem;
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+}
+
+.tiptap h3,
+.blog-content h3 {
+  font-size: 1.35rem;
+  margin: 1.5rem 0 1rem;
+  font-weight: 600;
+}
+
+.tiptap ul,
+.blog-content ul {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+.tiptap ol,
+.blog-content ol {
+  margin-left: 1.5rem;
+  list-style: decimal;
+}
+
+.blog-content {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #f5f5ff;
+}
+
+.blog-content img {
+  width: 100%;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 2.5rem 0;
+  object-fit: cover;
+  background: #0f0f16;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.6);
+}
+
