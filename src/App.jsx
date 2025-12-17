@@ -73,6 +73,14 @@ function App() {
               </AuthGate>
             }
           />
+          <Route path="*" element={
+            <div className="flex min-h-[60vh] items-center justify-center">
+              <div className="text-center space-y-4">
+                <h1 className="text-4xl font-bold text-white">404</h1>
+                <p className="text-white/70">Stranica nije pronađena</p>
+              </div>
+            </div>
+          } />
         </Routes>
       </main>
   </div>
