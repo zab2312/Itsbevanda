@@ -42,9 +42,9 @@ function App() {
   const mainSpacing = isLanding ? 'pt-16 sm:pt-20' : 'pt-32'
 
   return (
-    <div className="min-h-screen bg-[#121216] text-white">
+    <div className="min-h-screen bg-[#121216] text-white flex flex-col">
       <SiteNav />
-      <main className={`${mainSpacing} transition-[padding] duration-300`}>
+      <main className={`${mainSpacing} transition-[padding] duration-300 flex-1`}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/blog" element={<BlogListPage />} />
@@ -83,7 +83,11 @@ function App() {
           } />
         </Routes>
       </main>
-  </div>
+      <footer className="py-6 text-center text-xs text-white/40 border-t border-white/5 space-y-1">
+        <p>© {new Date().getFullYear()} Sva prava pridržana.</p>
+        <p className="text-white/30">SaboStudio</p>
+      </footer>
+    </div>
   )
 }
 

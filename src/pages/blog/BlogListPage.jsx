@@ -13,7 +13,12 @@ export function BlogListPage() {
         const data = await getPosts()
         setPosts(data)
       } catch (err) {
-        setError(err.message)
+        // Provide more helpful error messages
+        if (err.message?.includes('Failed to fetch') || err.message?.includes('ERR_NAME_NOT_RESOLVED')) {
+          setError('Greška pri povezivanju s bazom podataka. Provjerite je li Supabase konfiguriran u .env datoteci.')
+        } else {
+          setError(err.message || 'Došlo je do greške pri učitavanju članaka.')
+        }
       } finally {
         setLoading(false)
       }
@@ -31,7 +36,14 @@ export function BlogListPage() {
           Zapisi o vođenju društvenih mreža, učenju kroz rad, stvaranju sadržaja i iskustvima iz prakse.
         </p>
       </div>
-      {error ? <p className="text-center text-sm text-red-400">{error}</p> : null}
+      {error ? (
+        <div className="text-center space-y-2 py-8">
+          <p className="text-sm text-red-400">{error}</p>
+          <p className="text-xs text-white/50">
+            Provjerite je li .env datoteka postavljena s VITE_SUPABASE_URL i VITE_SUPABASE_ANON_KEY
+          </p>
+        </div>
+      ) : null}
       <BlogList posts={posts} loading={loading} />
     </div>
   )
