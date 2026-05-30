@@ -1,11 +1,14 @@
-import { NavLink, Route, Routes, useLocation } from 'react-router-dom'
+import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { SECRET_ADMIN_BASE } from './constants/routes'
 import { LandingPage } from './pages/LandingPage'
 import { BlogListPage } from './pages/blog/BlogListPage'
 import { BlogDetailPage } from './pages/blog/BlogDetailPage'
 import { AdminBlogPage } from './pages/admin/AdminBlogPage'
 import { AdminBlogEditorPage } from './pages/admin/AdminBlogEditorPage'
+import { AdminMembersPage } from './pages/admin/AdminMembersPage'
 import { AuthGate } from './components/auth/AuthGate'
+import { PrivacyPolicyPage } from './pages/legal/PrivacyPolicyPage'
+import { CookiePolicyPage } from './pages/legal/CookiePolicyPage'
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -38,17 +41,20 @@ const SiteNav = () => (
 
 function App() {
   const location = useLocation()
+  const isAdmin = location.pathname.startsWith(SECRET_ADMIN_BASE)
   const isLanding = location.pathname === '/'
-  const mainSpacing = isLanding ? 'pt-16 sm:pt-20' : 'pt-32'
+  const mainSpacing = isAdmin ? 'pt-6' : isLanding ? 'pt-16 sm:pt-20' : 'pt-32'
 
   return (
     <div className="min-h-screen bg-[#121216] text-white flex flex-col">
-      <SiteNav />
+      {!isAdmin ? <SiteNav /> : null}
       <main className={`${mainSpacing} transition-[padding] duration-300 flex-1`}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/blog" element={<BlogListPage />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
           <Route
             path={SECRET_ADMIN_BASE}
             element={
@@ -73,6 +79,14 @@ function App() {
               </AuthGate>
             }
           />
+          <Route
+            path={`${SECRET_ADMIN_BASE}/members`}
+            element={
+              <AuthGate>
+                <AdminMembersPage />
+              </AuthGate>
+            }
+          />
           <Route path="*" element={
             <div className="flex min-h-[60vh] items-center justify-center">
               <div className="text-center space-y-4">
@@ -83,7 +97,18 @@ function App() {
           } />
         </Routes>
       </main>
-      <footer className="py-6 text-center text-xs text-white/40 border-t border-white/5 space-y-1">
+      <footer className="py-6 px-4 text-center text-xs text-white/40 border-t border-white/5 space-y-3">
+        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+          <Link to="/privacy-policy" className="hover:text-white/70 transition-colors">
+            Politika privatnosti
+          </Link>
+          <span className="text-white/20" aria-hidden="true">
+            ·
+          </span>
+          <Link to="/cookie-policy" className="hover:text-white/70 transition-colors">
+            Politika kolačića
+          </Link>
+        </nav>
         <p>© {new Date().getFullYear()} Sva prava pridržana.</p>
         <p className="text-white/30">SaboStudio</p>
       </footer>

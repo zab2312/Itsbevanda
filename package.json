@@ -8,8 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0",
+    "@fontsource/inter": "^5.2.8",
     "@radix-ui/react-slot": "^1.0.2",
+    "@supabase/supabase-js": "^2.45.0",
     "@tiptap/extension-code-block-lowlight": "^2.6.6",
     "@tiptap/extension-hard-break": "^2.6.6",
     "@tiptap/extension-heading": "^2.6.6",
@@ -22,6 +23,7 @@
     "@tiptap/starter-kit": "^2.6.6",
     "animejs": "^3.2.1",
     "clsx": "^2.1.1",
+    "geist": "^1.7.1",
     "lowlight": "^2.9.0",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",

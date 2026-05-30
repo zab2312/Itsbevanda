@@ -25,7 +25,7 @@ export function AdminBlogEditorPage({ mode = 'create' }) {
       try {
         const post = await getPostById(id)
         if (!post) {
-          setError('Unable to find that post')
+          setError('Objavu nije moguće pronaći')
         } else {
           setInitialData(post)
         }
@@ -61,14 +61,14 @@ export function AdminBlogEditorPage({ mode = 'create' }) {
   }
 
   if (loading) {
-    return <div className="mx-auto max-w-4xl px-4 py-20 text-white/70">Loading editor...</div>
+    return <div className="mx-auto max-w-4xl px-4 py-20 text-white/70">Učitavanje editora...</div>
   }
 
   return (
     <div className="mx-auto max-w-4xl px-4 pb-20 pt-10 space-y-6">
       <div>
-        <p className="text-xs uppercase tracking-[0.4em] text-white/50">{mode === 'create' ? 'New post' : 'Edit post'}</p>
-        <h1 className="text-3xl font-geist text-white">{mode === 'create' ? 'Compose a new story' : 'Update your story'}</h1>
+        <p className="text-xs uppercase tracking-[0.4em] text-white/50">{mode === 'create' ? 'Nova objava' : 'Uređivanje objave'}</p>
+        <h1 className="text-3xl font-geist text-white">{mode === 'create' ? 'Napišite novu objavu' : 'Uredite objavu'}</h1>
       </div>
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
       <BlogEditor initialData={initialData} onSubmit={handleSubmit} submitting={submitting} mode={mode} />

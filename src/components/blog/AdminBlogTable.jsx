@@ -3,13 +3,13 @@ import { Button } from '../ui/button'
 import { SECRET_ADMIN_BASE } from '../../constants/routes'
 
 const formatDate = (value) =>
-  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(value))
+  new Intl.DateTimeFormat('hr-HR', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(value))
 
 export function AdminBlogTable({ posts = [], onDelete }) {
   if (!posts.length) {
     return (
       <div className="rounded-3xl border border-dashed border-white/10 bg-[#1A1A22] p-10 text-center text-white/70">
-        No blog posts yet. Start by creating one.
+        Još nema objava. Započnite kreiranjem nove.
       </div>
     )
   }
@@ -17,11 +17,11 @@ export function AdminBlogTable({ posts = [], onDelete }) {
   return (
     <div className="overflow-hidden rounded-3xl border border-white/5 bg-[#1B1B24] shadow-[0_18px_45px_rgba(0,0,0,0.55)]">
       <div className="grid grid-cols-5 gap-4 border-b border-white/5 px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white/40">
-        <span>Title</span>
+        <span>Naslov</span>
         <span>Status</span>
-        <span>Created</span>
-        <span>Updated</span>
-        <span className="text-right">Actions</span>
+        <span>Kreirano</span>
+        <span>Ažurirano</span>
+        <span className="text-right">Akcije</span>
       </div>
       <div className="divide-y divide-white/5">
         {posts.map((post) => (
@@ -36,25 +36,25 @@ export function AdminBlogTable({ posts = [], onDelete }) {
                   post.published ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/10 text-amber-200'
                 }`}
               >
-                {post.published ? 'Published' : 'Draft'}
+                {post.published ? 'Objavljeno' : 'Nacrt'}
               </span>
             </div>
             <div className="text-white/60">{formatDate(post.created_at)}</div>
             <div className="text-white/60">{formatDate(post.updated_at)}</div>
             <div className="flex items-center justify-end gap-2">
               <Button asChild size="sm" variant="outline">
-                <Link to={`${SECRET_ADMIN_BASE}/edit/${post.id}`}>Edit</Link>
+                <Link to={`${SECRET_ADMIN_BASE}/edit/${post.id}`}>Uredi</Link>
               </Button>
               <Button
                 size="sm"
                 variant="destructive"
                 onClick={() => {
-                  if (window.confirm('Delete this post?')) {
+                  if (window.confirm('Obriši ovu objavu?')) {
                     onDelete?.(post.id)
                   }
                 }}
               >
-                Delete
+                Obriši
               </Button>
             </div>
           </div>
@@ -63,4 +63,3 @@ export function AdminBlogTable({ posts = [], onDelete }) {
     </div>
   )
 }
-

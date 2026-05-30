@@ -113,7 +113,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
         ...prev,
         images: [...(prev.images || []), url]
       }))
-      setFeedback('Image uploaded')
+      setFeedback('Slika je učitana')
       setTimeout(() => setFeedback(''), 3000)
     } catch (error) {
       setFeedback(error.message)
@@ -127,7 +127,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
       setCoverUploading(true)
       const { url } = await uploadCoverImage(file)
       setFormState((prev) => ({ ...prev, cover_image: url }))
-      setFeedback('Cover uploaded')
+      setFeedback('Naslovna slika je učitana')
       setTimeout(() => setFeedback(''), 3000)
     } catch (error) {
       setFeedback(error.message)
@@ -139,7 +139,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
   const handleSubmit = (event) => {
     event.preventDefault()
     if (!formState.title || !formState.slug) {
-      setFeedback('Title and slug are required.')
+      setFeedback('Naslov i URL adresa su obavezni.')
       return
     }
 
@@ -159,7 +159,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
   const addLink = () => {
     if (!editor) return
     const previousUrl = editor.getAttributes('link')?.href
-    const url = window.prompt('URL', previousUrl)
+    const url = window.prompt('URL poveznice', previousUrl)
     if (url === null) return
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run()
@@ -171,7 +171,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
   const toolbarButtons = [
     {
       icon: Bold,
-      label: 'Bold',
+      label: 'Podebljano',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleBold().run()
@@ -180,7 +180,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: Italic,
-      label: 'Italic',
+      label: 'Kurziv',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleItalic().run()
@@ -189,7 +189,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: UnderlineIcon,
-      label: 'Underline',
+      label: 'Podcrtano',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleUnderline().run()
@@ -198,7 +198,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: Heading2,
-      label: 'Heading',
+      label: 'Naslov',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -207,7 +207,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: List,
-      label: 'Bullet List',
+      label: 'Lista',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleBulletList().run()
@@ -216,7 +216,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: ListOrdered,
-      label: 'Ordered List',
+      label: 'Numerirana lista',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleOrderedList().run()
@@ -225,7 +225,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: Quote,
-      label: 'Quote',
+      label: 'Citat',
       action: () => {
         if (!editor) return
         editor.chain().focus().toggleBlockquote().run()
@@ -234,7 +234,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     },
     {
       icon: Minus,
-      label: 'Horizontal Rule',
+      label: 'Vodoravna crta',
       action: () => {
         if (!editor) return
         editor.chain().focus().setHorizontalRule().run()
@@ -247,11 +247,11 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
     <form onSubmit={handleSubmit} className="space-y-10">
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="space-y-4">
-          <Label htmlFor="title">Title</Label>
-          <Input id="title" value={formState.title} onChange={(event) => handleTitleChange(event.target.value)} placeholder="Write an inspiring title" required />
+          <Label htmlFor="title">Naslov</Label>
+          <Input id="title" value={formState.title} onChange={(event) => handleTitleChange(event.target.value)} placeholder="Napišite inspirativni naslov" required />
         </div>
         <div className="space-y-4">
-          <Label htmlFor="slug">Slug</Label>
+          <Label htmlFor="slug">URL adresa</Label>
           <Input
             id="slug"
             value={formState.slug}
@@ -265,25 +265,25 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
       </div>
 
       <div className="space-y-4">
-        <Label htmlFor="excerpt">Excerpt</Label>
+        <Label htmlFor="excerpt">Sažetak</Label>
         <Textarea
           id="excerpt"
           rows={3}
           value={formState.excerpt}
           onChange={(event) => setFormState((prev) => ({ ...prev, excerpt: event.target.value }))}
-          placeholder="Summarize the main idea in a couple of sentences."
+          placeholder="Sažmite glavnu ideju u nekoliko rečenica."
         />
       </div>
 
       <div className="space-y-4">
-        <Label>Cover Image</Label>
+        <Label>Naslovna slika</Label>
         <div className="rounded-3xl border border-dashed border-white/10 bg-[#15141B] p-6">
           {formState.cover_image ? (
             <div className="relative mb-4 overflow-hidden rounded-2xl border border-white/10">
-              <img src={formState.cover_image} alt="Cover" className="h-64 w-full object-cover" />
+              <img src={formState.cover_image} alt="Naslovna slika" className="h-64 w-full object-cover" />
             </div>
           ) : (
-            <p className="text-sm text-white/40 mb-4">Upload a 1600x900px cover image.</p>
+            <p className="text-sm text-white/40 mb-4">Učitajte naslovnu sliku 1600×900 px.</p>
           )}
           <input
             ref={coverInputRef}
@@ -297,13 +297,13 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
             }}
           />
           <Button type="button" disabled={coverUploading} onClick={() => coverInputRef.current?.click()}>
-            {coverUploading ? 'Uploading...' : formState.cover_image ? 'Replace cover' : 'Upload cover'}
+            {coverUploading ? 'Učitavanje...' : formState.cover_image ? 'Zamijeni naslovnu' : 'Učitaj naslovnu'}
           </Button>
         </div>
       </div>
 
       <div className="space-y-4">
-        <Label>Content</Label>
+        <Label>Sadržaj</Label>
         <div className="rounded-3xl border border-white/10 bg-[#15141B]">
           <div className="flex flex-wrap gap-2 border-b border-white/5 px-4 py-3">
             {toolbarButtons.map((button) => (
@@ -318,14 +318,14 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
             ))}
             <MenuButton
               icon={LinkIcon}
-              label="Link"
+              label="Poveznica"
               disabled={!editor}
               active={!!editor?.isActive('link')}
               onClick={addLink}
             />
             <MenuButton
               icon={ImageIcon}
-              label="Image"
+              label="Slika"
               disabled={!editor || inlineUploading}
               active={false}
               onClick={() => inlineInputRef.current?.click()}
@@ -352,8 +352,8 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
         <div className="flex items-center gap-3">
           <Switch checked={formState.published} onCheckedChange={(checked) => setFormState((prev) => ({ ...prev, published: checked }))} />
           <div>
-            <p className="text-white font-medium">{formState.published ? 'Published' : 'Draft'}</p>
-            <p className="text-xs text-white/50">Toggles the public visibility.</p>
+            <p className="text-white font-medium">{formState.published ? 'Objavljeno' : 'Nacrt'}</p>
+            <p className="text-xs text-white/50">Uključuje ili isključuje javnu vidljivost.</p>
           </div>
         </div>
       </div>
@@ -362,7 +362,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
 
       <div className="flex flex-wrap gap-4">
         <Button type="submit" disabled={submitting}>
-          {submitting ? 'Saving...' : mode === 'create' ? 'Publish Post' : 'Save changes'}
+          {submitting ? 'Spremanje...' : mode === 'create' ? 'Spremi objavu' : 'Spremi promjene'}
         </Button>
         <Button
           type="button"
@@ -372,7 +372,7 @@ export function BlogEditor({ initialData = {}, onSubmit, submitting = false, mod
             editor.chain().focus().clearContent().run()
           }}
         >
-          Clear content
+          Očisti sadržaj
         </Button>
       </div>
     </form>

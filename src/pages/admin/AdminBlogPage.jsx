@@ -39,15 +39,15 @@ export function AdminBlogPage() {
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-10 space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Content</p>
-          <h1 className="text-3xl font-geist text-white">Blog Posts</h1>
+          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Sadržaj</p>
+          <h1 className="text-3xl font-geist text-white">Blog objave</h1>
         </div>
         <Button asChild>
-          <Link to={`${SECRET_ADMIN_BASE}/new`}>Create new post</Link>
+          <Link to={`${SECRET_ADMIN_BASE}/new`}>Nova objava</Link>
         </Button>
       </div>
       {error ? <p className="text-red-400 text-sm">{error}</p> : null}
-      {loading ? <div className="text-white/70">Loading...</div> : <AdminBlogTable posts={posts} onDelete={handleDelete} />}
+      {loading ? <div className="text-white/70">Učitavanje...</div> : <AdminBlogTable posts={posts} onDelete={handleDelete} />}
     </div>
   )
 }

@@ -12,6 +12,7 @@ import {
   Globe2
 } from 'lucide-react'
 import { initAnimations } from '../scripts/animations'
+import { FormDisclaimer } from '../components/legal/FormDisclaimer'
 
 const CALENDLY_URL = 'https://calendly.com/ivan-bevanda100/besplatni-konzultacijski-poziv-rast-uz-drustvene-mreze'
 
@@ -189,7 +190,7 @@ export function LandingPage() {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/mJM_Lv_dwt0?si=atSFc9dDCkpJAHAy"
+                src="https://www.youtube-nocookie.com/embed/mJM_Lv_dwt0"
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -266,6 +267,7 @@ export function LandingPage() {
             </div>
             <div className="animated-card rounded-2xl bg-[#1E1625] border border-white/5 p-4 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
               <div ref={calendlyContainerRef} className="w-full" style={{ minWidth: '320px', height: '1100px', overflow: 'hidden' }}></div>
+              <FormDisclaimer className="mt-4 px-1 text-center sm:text-left" />
             </div>
           </section>
 
